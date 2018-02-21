@@ -4,6 +4,7 @@ h1, h2 {
 
 .App {
   text-align: center;
+  padding: 20px;
 }
 
 .App-logo {
@@ -30,6 +31,30 @@ h1, h2 {
 
 .App-intro {
   font-size: large;
+}
+
+.Track {
+  background-color: gray;
+  width: 80%;
+  float: right;
+  height: 950px;
+  margin-bottom: 20px;
+}
+
+.Start {
+  background: green;
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+  font-size: 28px;
+}
+
+.Reset {
+  background: red;
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+  font-size: 28px;
 }
 
 @keyframes App-logo-spin {

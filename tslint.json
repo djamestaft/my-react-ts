@@ -20,7 +20,8 @@
 		"forin": true,
 		"indent": [
 			true,
-			"tabs"
+			"spaces",
+			4
 		],
 		"interface-name": [
 			true,
@@ -121,6 +122,7 @@
 			"check-separator",
 			"check-type",
 			"check-typecast"
-		]
+		],
+		"allow-js": true,
 	}
 }
