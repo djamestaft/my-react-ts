@@ -6,6 +6,7 @@ import { PersonInterface } from './interfaces/Person';
 import { shufflearray, selectFirstFive } from '../../utils/ArrayUtilities';
 import Typography from 'material-ui/Typography';
 
+// Interfaces for Race component
 interface Props {
     raceWinnerCallback: Function;
     gameStarted: boolean;
@@ -15,6 +16,7 @@ interface State {
     arrayJockeys: Array<object>;
 }
 
+// Abstracted utils method
 const shuffledArray: Array<object> = shufflearray(jsonData);
 const randoms: Array<object> = selectFirstFive(shuffledArray);
 
@@ -24,7 +26,7 @@ export class Race extends React.Component<Props, State> {
         this.callback = this.callback.bind(this);
         this.resetHandler = this.resetHandler.bind(this);
         
-        // assign randoms array to arrayJockey for Race
+        // Assign randoms array to arrayJockey for Race
         this.state = {
             arrayJockeys: randoms.map((person: PersonInterface, i: number) => (
                 { name: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373' }
@@ -41,6 +43,7 @@ export class Race extends React.Component<Props, State> {
         }
     }
     
+    // Method to select new racers when game is reset
     resetHandler() {
         const shuffleArray: Array<object> = shufflearray(jsonData);
         const newRandoms: Array<object> = selectFirstFive(shuffleArray);
