@@ -4,6 +4,7 @@ import { Jockey } from '../Jockey';
 const jsonData = require('../../team.json');
 import { PersonInterface } from './interfaces/Person';
 import { shufflearray, selectFirstFive } from '../../utils/ArrayUtilities';
+import Typography from 'material-ui/Typography';
 
 interface Props {
     raceWinnerCallback: Function;
@@ -18,15 +19,15 @@ const shuffledArray: Array<object> = shufflearray(jsonData);
 const randoms: Array<object> = selectFirstFive(shuffledArray);
 
 export class Race extends React.Component<Props, State> {
-
     constructor(props: Props) {
         super(props);
         this.callback = this.callback.bind(this);
-
+        this.resetHandler = this.resetHandler.bind(this);
+        
         // assign randoms array to arrayJockey for Race
         this.state = {
             arrayJockeys: randoms.map((person: PersonInterface, i: number) => (
-                {name: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373'}
+                { name: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373' }
             ))
         };
     }
@@ -38,15 +39,25 @@ export class Race extends React.Component<Props, State> {
             });
             this.props.raceWinnerCallback(winner);
         }
+    }
+    
+    resetHandler() {
+        const shuffleArray: Array<object> = shufflearray(jsonData);
+        const newRandoms: Array<object> = selectFirstFive(shuffleArray);
         
+        this.setState({
+            arrayJockeys: newRandoms.map((person: PersonInterface, i: number) => (
+                { name: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373' }
+            ))
+        });
     }
     
     render() {
-        if (this.props.gameStarted) {            
+        if (this.props.gameStarted) {
             return (
                 <div>
-                    { 
-                    this.state.arrayJockeys.map((person: PersonInterface, i: number ) => {
+                {
+                    this.state.arrayJockeys.map((person: PersonInterface, i: number) => {
                         return (
                             <Jockey
                                 key={i}
@@ -57,13 +68,15 @@ export class Race extends React.Component<Props, State> {
                             />
                         );
                     })
-                    }
-                </div>
-            );
-        } else {
-            return (
-                <h1>Start the race by clicking the "Start Race" button!</h1>
-            );
-        }
+                }
+            </div>
+        );
+    } else {
+        return (
+            <Typography variant="display2">
+                Click "START GAME" to start the game
+              </Typography>
+        );
     }
+}
 }

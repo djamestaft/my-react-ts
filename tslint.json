@@ -122,7 +122,6 @@
 			"check-separator",
 			"check-type",
 			"check-typecast"
-		],
-		"allow-js": true,
+		]
 	}
 }

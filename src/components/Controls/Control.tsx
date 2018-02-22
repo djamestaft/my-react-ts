@@ -1,4 +1,7 @@
 import * as React from 'react';
+import Button from 'material-ui/Button';
+import './Control.css';
+import Typography from 'material-ui/Typography';
 
 interface Props {
     resetClicked: (ev: React.MouseEvent<HTMLButtonElement>) => void;
@@ -13,8 +16,13 @@ export class Controls extends React.Component<Props> {
     render() {
         return(
             <div>
-                <button className="Start" onClick={this.props.startClicked}>Start Game!</button>
-                <button className="Reset" onClick={this.props.resetClicked}>Start Game!</button>
+                <Typography variant="display1">
+                    Game Controls
+                </Typography>
+                <div className="controls">
+                    <Button variant="raised" color="primary" onClick={this.props.startClicked}>Start Game</Button>
+                    <Button variant="raised" color="secondary" onClick={this.props.resetClicked}>Reset Game</Button>
+                </div>
             </div>
         );
     }

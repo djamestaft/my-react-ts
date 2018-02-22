@@ -7,6 +7,10 @@ h1, h2 {
   padding: 20px;
 }
 
+.Track {
+  height: calc(100% - 2px);
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -34,10 +38,8 @@ h1, h2 {
 }
 
 .Track {
-  background-color: gray;
   width: 80%;
   float: right;
-  height: 950px;
   margin-bottom: 20px;
 }
 
@@ -55,6 +57,14 @@ h1, h2 {
   height: 100px;
   border-radius: 10px;
   font-size: 28px;
+}
+
+.MuiLinearProgress-root-76 MuiLinearProgress-primaryColor-77{
+  height: 40px;
+}
+
+.TrackCard {
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {

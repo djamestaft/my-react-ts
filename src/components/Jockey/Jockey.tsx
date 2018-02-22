@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './Jockey.css';
+import { LinearProgress } from 'material-ui/Progress';
 
 interface Props {
     name: string;
@@ -11,30 +12,30 @@ interface Props {
 interface State {
     interval: number;
     progress: number;
-    name: string;
 }
 
 export class Jockey extends React.Component<Props, State> {
+    private intervalId: number;
     constructor(props: Props) {
         super(props);
         this.state = {
-            interval: Math.floor(Math.random() * 50) + 10,
+            interval: Math.floor(Math.random() * 500) + 100,
             progress: 0,
-            name: this.props.name
         };
     }
 
     componentDidMount() {
-        setInterval(this.timer, this.state.interval);
+        this.intervalId = window.setInterval(this.timer, this.state.interval);
+        window.console.log(this.intervalId);
     }
 
     timer = () => {
         const { callback } = this.props;
         if (this.state.progress !== 100) {
-            this.setState({ progress: this.state.progress + 0.001 });
+            this.setState({ progress: this.state.progress + 1 });
         } else {
             if (callback) {
-                callback(this.state.progress, this.state.name);
+                callback(this.state.progress, this.props.name);
             }
         }
     }
@@ -42,13 +43,12 @@ export class Jockey extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                <div className="Jockey" >
+                <div className="jockey">
                     <img src={this.props.avatar} alt="The Jockey" />
-                    <progress
-                        value={this.state.progress}
-                        color={this.props.color}
-                    />
-                    <h5>{this.state.name}</h5>
+                </div>
+                <div className="jockey-details">
+                    <LinearProgress variant="determinate" value={this.state.progress}/>
+                    <h5>{this.props.name}</h5>
                 </div>
             </div>
         );

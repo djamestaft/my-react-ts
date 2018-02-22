@@ -1,0 +1,9 @@
+Button {
+    margin-bottom: 10px;
+}
+
+.controls {
+    border: 6px dashed rgb(128, 128, 128);
+    display: inline-grid;
+    padding: 60px;
+}
