@@ -1,58 +1,29 @@
 import * as React from 'react';
 import './Race.css';
 import { Jockey } from '../Jockey';
-const jsonData = require('../../team.json');
-import { PersonInterface } from './interfaces/Person';
-import { shufflearray, selectFirstFive } from '../../utils/ArrayUtilities';
+import { PersonInterface } from '../../utils/interfaces/Person';
 import Typography from 'material-ui/Typography';
 
-// Interfaces for Race component
+// Interfaces for Props
 interface Props {
     raceWinnerCallback: Function;
     gameStarted: boolean;
+    trackRacers: Array<object>;
 }
 
-interface State {
-    arrayJockeys: Array<object>;
-}
-
-// Abstracted utils method
-const shuffledArray: Array<object> = shufflearray(jsonData);
-const randoms: Array<object> = selectFirstFive(shuffledArray);
-
-export class Race extends React.Component<Props, State> {
+export class Race extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.callback = this.callback.bind(this);
-        this.resetHandler = this.resetHandler.bind(this);
-        
-        // Assign randoms array to arrayJockey for Race
-        this.state = {
-            arrayJockeys: randoms.map((person: PersonInterface, i: number) => (
-                { name: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373' }
-            ))
-        };
     }
     
     callback(progress: number, winnerName: string) {
         if (progress === 100) {
-            let winner = this.state.arrayJockeys.find((login) => {
+            let winner = this.props.trackRacers.find((login) => {
                 return winnerName = name;
             });
             this.props.raceWinnerCallback(winner);
         }
-    }
-    
-    // Method to select new racers when game is reset
-    resetHandler() {
-        const shuffleArray: Array<object> = shufflearray(jsonData);
-        const newRandoms: Array<object> = selectFirstFive(shuffleArray);
-        
-        this.setState({
-            arrayJockeys: newRandoms.map((person: PersonInterface, i: number) => (
-                { name: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373' }
-            ))
-        });
     }
     
     render() {
@@ -60,7 +31,7 @@ export class Race extends React.Component<Props, State> {
             return (
                 <div>
                 {
-                    this.state.arrayJockeys.map((person: PersonInterface, i: number) => {
+                    this.props.trackRacers.map((person: PersonInterface, i: number) => {
                         return (
                             <Jockey
                                 key={i}
@@ -77,8 +48,8 @@ export class Race extends React.Component<Props, State> {
     } else {
         return (
             <Typography variant="display2">
-                Click "START GAME" to start the game
-              </Typography>
+                Click "START RACE" to start the game
+            </Typography>
         );
     }
 }

@@ -20,8 +20,8 @@ export class Controls extends React.Component<Props> {
                     Game Controls
                 </Typography>
                 <div className="controls">
-                    <Button variant="raised" color="primary" onClick={this.props.startClicked}>Start Game</Button>
-                    <Button variant="raised" color="secondary" onClick={this.props.resetClicked}>Reset Game</Button>
+                    <Button variant="raised" color="primary" onClick={this.props.startClicked}>Start Race</Button>
+                    <Button variant="raised" color="secondary" onClick={this.props.resetClicked}>Reset Race</Button>
                 </div>
             </div>
         );

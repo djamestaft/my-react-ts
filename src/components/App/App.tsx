@@ -3,6 +3,7 @@ import { Race } from '../Race';
 import './App.css';
 import { Controls } from '../Controls';
 import Card from 'material-ui/Card';
+import { selectNewRacers } from '../../utils/ArrayUtilities';
 
 interface Props {
 }
@@ -11,7 +12,7 @@ interface State {
     sampleStateProp?: string;
     gameStarted: boolean;
     gameFinished: boolean;
-    gameReset: boolean;
+    trackRacers: Array<object>;
     winner?: string;
 }
 
@@ -22,8 +23,8 @@ export class App extends React.Component<Props, State> {
         this.state = { 
             gameStarted: false,
             gameFinished: false,
-            gameReset: false,
-            winner: ''
+            winner: '',
+            trackRacers: selectNewRacers()
         };
 
         this.startBtnHandler = this.startBtnHandler.bind(this);
@@ -41,7 +42,8 @@ export class App extends React.Component<Props, State> {
     
     resetBtnHandler() {
         this.setState({gameStarted: false});
-        this.setState({gameReset: true});
+        this.setState({trackRacers: selectNewRacers()});
+        
     }
     
     render() {
@@ -51,9 +53,9 @@ export class App extends React.Component<Props, State> {
                     <Card className="TrackCard">
                         <Race 
                             raceWinnerCallback={this.handleRaceWinner} 
-                            gameStarted={this.state.gameStarted} 
+                            gameStarted={this.state.gameStarted}
+                            trackRacers={this.state.trackRacers} 
                         />
-                        {/* {this.state.winner && <p>{this.state.winner}</p>} */}
                     </Card>
                 </div>
                 <Controls startClicked={this.startBtnHandler} resetClicked={this.resetBtnHandler}/>
