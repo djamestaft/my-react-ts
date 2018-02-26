@@ -12,31 +12,34 @@ interface Props {
 interface State {
     interval: number;
     progress: number;
+    finished: boolean;
 }
 
 export class Jockey extends React.Component<Props, State> {
-    private intervalId: number;
     constructor(props: Props) {
         super(props);
         this.state = {
-            interval: Math.floor(Math.random() * 500) + 100,
+            interval: Math.floor(Math.random() * 50) + 10,
             progress: 0,
+            finished: false
         };
     }
 
     componentDidMount() {
-        this.intervalId = window.setInterval(this.timer, this.state.interval);
-        window.console.log(this.intervalId);
+        setInterval(this.timer, this.state.interval);
     }
 
     timer = () => {
         const { callback } = this.props;
+        const { progress, finished } = this.state;
         if (this.state.progress !== 100) {
-            this.setState({ progress: this.state.progress + 1 });
-        } else {
+            this.setState({ progress: progress + 1 });
+        } else if (progress === 100 && finished === false) {
+            this.setState({ finished: true });
             if (callback) {
-                callback(this.state.progress, this.props.name);
+                callback(progress, this.props.name);
             }
+            window.console.log(progress);
         }
     }
 
@@ -47,7 +50,7 @@ export class Jockey extends React.Component<Props, State> {
                     <img src={this.props.avatar} alt="The Jockey" />
                 </div>
                 <div className="jockey-details">
-                    <LinearProgress variant="determinate" value={this.state.progress}/>
+                    <LinearProgress variant="determinate" value={this.state.progress} />
                     <h5>{this.props.name}</h5>
                 </div>
             </div>

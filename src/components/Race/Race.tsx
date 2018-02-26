@@ -18,12 +18,11 @@ export class Race extends React.Component<Props> {
     }
     
     callback(progress: number, winnerName: string) {
+        let winner;
         if (progress === 100) {
-            let winner = this.props.trackRacers.find((login) => {
-                return winnerName = name;
-            });
-            this.props.raceWinnerCallback(winner);
+            winner = winnerName;
         }
+        this.props.raceWinnerCallback(winner);
     }
     
     render() {
@@ -48,7 +47,7 @@ export class Race extends React.Component<Props> {
     } else {
         return (
             <Typography variant="display2">
-                Click "START RACE" to start the game
+                Click "START RACE" to start the race
             </Typography>
         );
     }

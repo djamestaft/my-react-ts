@@ -11,6 +11,6 @@ export const selectNewRacers = () => {
     const newRandoms: Array<object> = selectFirstFive(shuffleArray);
     
     return newRandoms.map((person: PersonInterface, i: number) => (
-        { name: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373' }
+        { login: person.login, avatar_url: person.avatar_url, complete: false, color: '#E57373' }
     ));
 };

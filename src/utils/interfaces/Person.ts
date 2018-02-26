@@ -1,5 +1,6 @@
 export interface PersonInterface {
     login: string;
+    name?: string;
     id: number;
     avatar_url: string;
     gravatar_id: string;
